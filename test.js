@@ -11,9 +11,9 @@ var div = document.createElement("div");
 div.innerHTML = "Hello, Eric!";
 document.body.appendChild(div);
 
-d3.select.("body").selectAll("p")
+d3.select("body").selectAll("p")
    .data(dataset)
    .enter()
    .append("p")
    .text("New paragraph");
-   
+
