@@ -15,5 +15,5 @@ d3.select("body").selectAll("p")
    .data(dataset)
    .enter()
    .append("p")
-   .text("New paragraph");
+   .text( function(d) { return d; } );
 
