@@ -21,7 +21,7 @@ d3.select("body").selectAll("p")
 var ob = {
 	name: eric,
 	gender: male,
-	age: 45
+	age: 45,
 	fun: function() {  return 1;  }
    };
 
