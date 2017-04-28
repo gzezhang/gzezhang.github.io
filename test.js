@@ -29,3 +29,4 @@ ob.job = "engineer";
 
 console.log(ob.name);
 console.log(ob.age);   
+console.log(JSON.stringify(ob));
