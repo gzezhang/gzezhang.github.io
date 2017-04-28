@@ -19,8 +19,8 @@ d3.select("body").selectAll("p")
    .style("color", "red");
 
 var ob = {
-	name: eric,
-	gender: male,
+	name: "eric",
+	gender: "male",
 	age: 45,
 	fun: function() {  return 1;  }
    };
