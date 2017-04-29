@@ -30,3 +30,6 @@ ob.job = "engineer";
 console.log(ob.name);
 console.log(ob.age);   
 console.log(JSON.stringify(ob));
+
+guess = prompt("Please input number (0 - 10):");
+console.log(guess);
