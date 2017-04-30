@@ -7,7 +7,7 @@
 
   "data": [
     {
-      "name": "states",
+      "name": "counties",
       "url": "data/us-10m.json",
       "format": {"type": "topojson", "feature": "counties"},
       "transform": [
