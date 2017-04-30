@@ -7,9 +7,9 @@
 
   "data": [
     {
-      "name": "states",
+      "name": "neighborhoods",
       "url": "data/Neighborhoods.json",
-      "format": {"type": "topojson", "feature": "nested"},
+      "format": {"type": "topojson", "feature": "neighborhoods"},
       "transform": [
         {
           "type": "geopath",
@@ -31,7 +31,7 @@
   "marks": [
     {
       "type": "path",
-      "from": {"data": "nested"},
+      "from": {"data": "neighborhoods"},
       "encode": {
         "enter": {
           "fill": {"value": "#dedede"},
