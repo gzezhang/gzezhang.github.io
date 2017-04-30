@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "width": 900,
+  "height": 560,
+  "padding": {"top": 0, "left": 0, "right": 0, "bottom": 0},
+  "autosize": "none",
+
+  "data": [
+    {
+      "name": "states",
+      "url": "data/Neighborhoods.json",
+      "format": {"type": "topojson", "feature": "id"},
+      "transform": [
+        {
+          "type": "geopath",
+          "projection": "projection"
+        }
+      ]
+    }
+  ],
+
+  "projections": [
+    {
+      "name": "projection",
+      "type": "albersUsa",
+      "scale": 600,
+      "translate": [{"signal": "width / 2"}, {"signal": "height / 2"}]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "path",
+      "from": {"data": "id"},
+      "encode": {
+        "enter": {
+          "fill": {"value": "#dedede"},
+          "stroke": {"value": "red"}
+        },
+        "update": {
+          "path": {"field": "path"}
+        }
+      }
+    }
+  ]
+}
