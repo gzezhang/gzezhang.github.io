@@ -27,7 +27,7 @@
       "name": "condo",
       "source": "homeprice",
       "transform": [
-        {"type": "filter", "expr": "datum.type == condo"}
+        {"type": "filter", "expr": "datum.type == Condo"}
       ]
     },
     {
