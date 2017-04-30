@@ -1,0 +1,164 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "height": 400,
+  "padding": 5,
+
+  "signals": [
+    { "name": "chartWidth", "value": 300 },
+    { "name": "chartPad", "value": 20 },
+    { "name": "width", "update": "2 * chartWidth + chartPad" },
+    { "name": "year", "value": 2017,
+      "bind": {"input": "range", "min": 1996, "max": 2017, "step": 1} }
+  ],
+
+  "data": [
+    {
+      "name": "homeprice",
+      "url": "data/zillow.csv"
+    },
+    {
+      "name": "homeYear",
+      "source": "homeprice",
+      "transform": [
+        {"type": "filter", "expr": "datum.year == year"}
+      ]
+    },
+    {
+      "name": "condo",
+      "source": "homeprice",
+      "transform": [
+        {"type": "filter", "expr": "datum.type == condo"}
+      ]
+    },
+    {
+      "name": "SFH",
+      "source": "homeprice",
+      "transform": [
+        {"type": "filter", "expr": "datum.type == SFH"}
+      ]
+    },
+    {
+      "name": "monthGroups",
+      "source": "homeprice",
+      "transform": [
+        { "type": "aggregate", "groupby": ["month"] }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "y",
+      "type": "band",
+      "range": [{"signal": "height"}, 0],
+      "round": true,
+      "domain": {"data": "monthGroups", "field": "month"}
+    },
+    {
+      "name": "c",
+      "type": "ordinal",
+      "domain": [1, 2],
+      "range": ["#1f77b4", "#e377c2"]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {"data": "monthGroups"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "chartWidth + chartPad / 2"},
+          "y": {"scale": "y", "field": "month", "band": 0.5},
+          "text": {"field": "month"},
+          "baseline": {"value": "middle"},
+          "align": {"value": "center"},
+          "fill": {"value": "#000"}
+        }
+      }
+    },
+    {
+      "type": "group",
+
+      "encode": {
+        "update": {
+          "x": {"value": 0},
+          "height": {"signal": "height"}
+        }
+      },
+
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [{"signal": "chartWidth"}, 0],
+          "nice": true, "zero": true,
+          "domain": {"data": "homeprice", "field": "price"}
+        }
+      ],
+
+      "axes": [
+        {"orient": "bottom", "scale": "x", "format": "s"}
+      ],
+
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "condo"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "x", "field": "price"},
+              "x2": {"scale": "x", "value": 0},
+              "y": {"scale": "y", "field": "month"},
+              "height": {"scale": "y", "band": 1, "offset": -1},
+              "fillOpacity": {"value": 0.6},
+              "fill": {"scale": "c", "field": "type"}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+
+      "encode": {
+        "update": {
+          "x": {"signal": "chartWidth + chartPad"},
+          "height": {"signal": "height"}
+        }
+      },
+
+      "scales": [
+        {
+          "name": "x",
+          "type": "linear",
+          "range": [0, {"signal": "chartWidth"}],
+          "nice": true, "zero": true,
+          "domain": {"data": "homeprice", "field": "price"}
+        }
+      ],
+
+      "axes": [
+        {"orient": "bottom", "scale": "x", "format": "s"}
+      ],
+
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "SFH"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "x", "field": "price"},
+              "x2": {"scale": "x", "value": 0},
+              "y": {"scale": "y", "field": "month"},
+              "height": {"scale": "y", "band": 1, "offset": -1},
+              "fillOpacity": {"value": 0.6},
+              "fill": {"scale": "c", "field": "type"}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
