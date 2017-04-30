@@ -35,7 +35,7 @@
       "encode": {
         "enter": {
           "fill": {"value": "#dedede"},
-          "stroke": {"value": "white"}
+          "stroke": {"value": "red"}
         },
         "update": {
           "path": {"field": "path"}
