@@ -9,7 +9,7 @@
     {
       "name": "states",
       "url": "data/us-10m.json",
-      "format": {"type": "topojson", "feature": "land"},
+      "format": {"type": "topojson", "feature": "counties"},
       "transform": [
         {
           "type": "geopath",
@@ -31,7 +31,7 @@
   "marks": [
     {
       "type": "path",
-      "from": {"data": "land"},
+      "from": {"data": "counties"},
       "encode": {
         "enter": {
           "fill": {"value": "#dedede"},
