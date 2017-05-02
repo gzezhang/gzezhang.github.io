@@ -5,12 +5,35 @@
 
   "signals": [
     { "name": "chartWidth", "value": 300 },
-    { "name": "chartPad", "value": 20 },
+    { "name": "chartPad", "value": 30 },
     { "name": "width", "update": "2 * chartWidth + chartPad" },
     { "name": "year", "value": 2016,
       "bind": {"input": "range", "min": 1996, "max": 2017, "step": 1}},
-    { "name": "month", "value": 12,
-      "bind": {"input": "range", "min": 0, "max": 12, "step": 1}}
+    { "name": "neighborhood",
+      "value": "University District",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Capitol Hill",
+          "Beacon Hill",
+          "University District",
+          "Ballard",
+          "Columbia City",
+          "Rainier Beach",
+          "Central",
+          "Madrona",
+          "Leschi",
+	  "Northgate"]
+      }
+    },
+    {
+     "name": "tooltip",
+     "value": {},
+     "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
   ],
 
   "data": [
@@ -26,15 +49,22 @@
       ]
     },
     {
-      "name": "condo",
+      "name": "neighborhoodYear",
       "source": "homeYear",
+      "transform": [
+        {"type": "filter", "expr": "datum.name == neighborhood"}
+      ]
+    },
+    {
+      "name": "condo",
+      "source": "neighborhoodYear",
       "transform": [
         {"type": "filter", "expr": "datum.hometype == 2"}
       ]
     },
     {
       "name": "SFH",
-      "source": "homeYear",
+      "source": "neighborhoodYear",
       "transform": [
         {"type": "filter", "expr": "datum.hometype == 1"}
       ]
@@ -60,7 +90,7 @@
       "name": "c",
       "type": "ordinal",
       "domain": [1, 2],
-      "range": ["#1f77b4", "#e377c2"]
+      "range": ["#2ca02c", "#ff7f0e"]
     }
   ],
 
@@ -116,10 +146,35 @@
               "height": {"scale": "y", "band": 1, "offset": -1},
               "fillOpacity": {"value": 0.6},
               "fill": {"scale": "c", "field": "hometype"}
-            }
+            },
+        "update": {
+            "fill": {"scale": "c", "field": "hometype"}
+            },
+        "hover": {
+          "fill": {"value": "red"}
+           }
           }
+        },
+      {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "x", "signal": "tooltip.price", "band": 0.5},
+          "y": {"scale": "y", "signal": "tooltip.month", "offset": 25},
+          "text": {"signal": "tooltip.price"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
         }
-      ]
+      }
+    }
+   ]
     },
     {
       "type": "group",
@@ -157,10 +212,35 @@
               "height": {"scale": "y", "band": 1, "offset": -1},
               "fillOpacity": {"value": 0.6},
               "fill": {"scale": "c", "field": "hometype"}
-            }
+            },
+        "update": {
+          "fill": {"scale": "c", "field": "hometype"}
+            },
+        "hover": {
+          "fill": {"value": "red"}
+           }
           }
+        },
+      {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "x", "signal": "tooltip.price", "band": 0.5},
+          "y": {"scale": "y", "signal": "tooltip.month", "offset": 25},
+          "text": {"signal": "tooltip.price"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
         }
-      ]
+      }
+    }
+   ]
     }
   ]
 }

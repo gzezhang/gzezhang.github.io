@@ -26,8 +26,21 @@
   </section>
 
   <section>
-    <em>[Add: Interactive visualization goes here!]</em>
-       <div id="vis"></div>
+    <em>Housing price of selected Seattle neighborhoods</em></BR></BR>
+     
+    <p>
+    <strong> NOTES: </strong>
+    <ol> 
+      <li>The graph lists monthly price of a designated year.</li>
+      <li>Left bar: price of condo;  Right bar: price of single-family house.</li>
+      <li>Cover period: April 1996 - March 2017.</li>
+      <li>Complete neighborshoods will be provided in final project.</li>
+      <li>Use slider/selection bar below graph to make selection.</li>
+      <li>Mouse hovering the bar will show actual price of the month.</li>
+    </ol>
+    </p>
+
+    <div id="vis"></div>
        <script type="text/javascript">
           var spec2 = "./prototype.json";
           vega.embed('#vis', spec2);
@@ -36,8 +49,17 @@
 
   <section>
     <h2>Design Rationale</h2>
+    [Add: A rationale for your design decisions. How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?]
     <p>
-      [Add: A rationale for your design decisions. How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?]
+    <ol> 
+    <li>This prototype intends to provide an easy-to-use tool for the audience to explore housing price of different Seattle neighborhoods. This will help current resident to decide the value of their current houses; and potential home buyer to find out the neighborhoods within affordability.</li>
+    <li>Our team wants to show price of both condo and single family house in the same chart, while showing monthly price change.</li>
+    <li>We explore different types of graphs, including bar chart (condo/SFH side by side), line chart, geographics maps, and treemap.</li>
+    <li>Our preferred graph will be geographic maps and we already find the neighborhood topojson file.  This is ideal because the audience will point their mouse to different neighborhood and the prices will show as a tip.  It is easy for the audience to explore neighborhoods that they don't know the name but with know proximity to certain target areas.  However, due to time constraint and unfamility with the tool, we have to push this idea to final project. </li>
+    <li>Bar and line chart are easier to execute but we feel that they are not appealing to the eyes of the audience. i.e. not consumer-friendly enough.</li>
+    <li>We finally settled on the "population pyramid" types which can demonstrate the price trend of a designated neighborhood.  The biggest problem with this design is that the audience has to be familiar with name of the neighborhood.   The second problem is that there are close to 100 neighborhoods in Seattle, and the dropdown list may be too long too hard to search with such a long list.  So for the prototype, we pick 10 neighborhoods to explore feasibility of the technology.</li>
+    <li>Once the graph type is decided, we start to work on color, space, size, etc. </li>
+    </ol>
     </p>
   </section>
 
@@ -45,6 +67,19 @@
     <h2>Development Process</h2>
     <p>
       [Add: An overview of your development process. Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?]
+    </p>
+  <p>
+    <ol> 
+    <li>Our team first discuss what subproblem to solve. Our intial goal is agressive (with final project in mind as well): we want to see what factors influence Seattle's housing price. </li>
+    <li>The team then discuss what datasets are needed and start to collect them.  We collect crime data by neighborshood, housing price, and others.</li>
+    <li>We all agree, after discussion, that map is the good encoding tool for audience's exploration. </li>
+    <li>However, we immediately encounter problem when put the above into execution. The biggest problem is to get ourselves familiar with the software tools. D3 is powerful but involves a lot of technical details.  In light of the May 03 deadline, we obviously didn't have enough time to go into small technical details. </li>
+    <li>We have to scale back our goal and find better tool. So finally, for this prototype project, we choose a single dataset (housing price) and vega.js. The logic is to get the interactive visualization up and running first, so that the team has an idea how deep the water can be. </li>
+    <li>Even so, the process is complicated than we expected. We don't have tools to DEBUG the process.  We scratched our head for a long time why the graph didn't show up in the browser. We finally have to move from .csv file to .json file. And after repeated tests, realize that json file is case sensitive. </li>
+    <li>After repeated tests, when the interactive graph finally appears in the browser, we then move forward to add other features, such as hovering etc. </li>
+    <li>We estimated total peole hour to be 4 people x 10 hours = 40 hours. 45% of our time is to get familiar and experiment with the software tool. 35% on design.</li>
+    <li>We expect that in the final project, design will take about 40% of our time. Web execution will take another 40%. </li>
+    </ol>
     </p>
   </section>
 
