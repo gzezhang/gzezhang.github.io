@@ -159,14 +159,13 @@
       "type": "text",
       "encode": {
         "enter": {
-          "align": {"value": "left"},
+          "align": {"value": "center"},
           "baseline": {"value": "bottom"},
           "fill": {"value": "#333"}
         },
         "update": {
           "x": {"scale": "x", "signal": "tooltip.price", "band": 0.5},
           "y": {"scale": "y", "signal": "tooltip.month", "offset": 25},
-          "text": [{"test": "tooltip.hometype === 2", "signal":"tooltip.price"}, {}],
           "fillOpacity": [
             {"test": "datum === tooltip", "value": 0},
             {"value": 1}
@@ -232,7 +231,7 @@
         "update": {
           "x": {"scale": "x", "signal": "tooltip.price", "band": 0.5},
           "y": {"scale": "y", "signal": "tooltip.month", "offset": 25},
-          "text": [{"test": "tooltip.hometype === 1", "signal":"tooltip.price"}, {}],
+          "text": {"signal": "tooltip.price"},
           "fillOpacity": [
             {"test": "datum === tooltip", "value": 0},
             {"value": 1}
